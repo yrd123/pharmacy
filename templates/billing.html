@@ -16,19 +16,16 @@
 }
 
 body {
-    font-family: cursive;
+    font-family:  cursive;
     font-size: font-size;
-    background-size: 200% 100% !important;
-    animation: move 10s ease infinite;
-    transform: translate3d(0, 0, 0);
-    background: linear-gradient(45deg, #49d49d 10%, #a2c7e5 90%);
-    height: 100vh;
+    background: url("../static/GettyImages-938938858-7b656e6317ab4e2797556bdddce9595d.jpg");
+    background-size: cover;
 }
 
 .user {
     width: 90%;
     max-width: 340px;
-    margin: 10vh auto;
+    margin: 15vh 5vh 10vh 135vh;
 }
 
 .user__header {
@@ -42,7 +39,7 @@ body {
     font-size: font-size;
     margin-bottom: -10px;
     font-weight: 500;
-    color: white;
+    color: rgb(0, 162, 255);
 }
 
 .form {
@@ -52,6 +49,7 @@ body {
     opacity: 0;
     transform: translate3d(0, 500px, 0);
     animation: arrive 500ms ease-in-out 0.9s forwards;
+    
 }
 
 .form--no {
@@ -69,8 +67,14 @@ body {
     border: 0;
     outline: 0;
     transition: 0.3s;
+    color:white;
+    background-color: rgb(0, 162, 255);;
+    
 }
-
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
 .btn {
     display: block;
     width: 100%;
@@ -158,30 +162,53 @@ body {
       <div class="navbar-menu" id="open-navbar1">
         <ul class="navbar-nav">
           <li><a href="#">Home</a></li>
-          <li ><a href="{% url 'signup' %}">Sign Up</a></li>
-          <li class="active"><a href="#">Login</a></li>
+          <li><a href="#">Profile</a></li>
+          <li class="navbar-dropdown">
+            <a href="#" class="dropdown-toggler" data-dropdown="my-dropdown-id">
+              Customer <i class="fa fa-angle-down"></i>
+            </a>
+            <ul class="dropdown" id="my-dropdown-id">
+              <li><a href="{% url 'loginCustomer' %}">Login a customer</a></li>
+              <li><a href="{% url 'registerCustomer' %}">Register a customer</a></li>
+              <li><a href="{% url 'customer' %}">View</a></li>
+            </ul>
+          </li>
+          <li><a href="{% url 'billing' %}">Billing</a></li>
+          <li><a href="#">LogOut</a></li>
         </ul>
       </div>
     </div>
   </nav>
 <div class="user">
     <header class="user__header">
-        <h1 class="user__title">Login</h1>
+        <h3 class="user__title">Register Customer</h3>
     </header>
     
     <form class="form">
-        <div class="form__group">
-            <input type="text" placeholder="Email" class="form__input" />
-        </div>
-        
-      
         
         <div class="form__group">
-            <input type="password" placeholder="Password" class="form__input" />
+            <input type="number" placeholder="Phone Number of Customer" class="form__input" />
+        </div>
+
+        <div class="form__group">
+            <input type="email" placeholder="Email" class="form__input" />
+        </div>
+
+        <div class="form__group">
+            <input type="text" placeholder="Patient Name" class="form__input" />
         </div>
         
-        <a href="{% url 'loginCustomer' %}"><button class="btn" type="button">Login</button></a>
+        <div class="form__group">
+            <input type="text" placeholder="Address" class="form__input" />
+        </div>
+
+        
+        <div class="form__group">
+            <input type="date" placeholder="Date of Birth" class="form__input" />
+        </div>     
+        
+        
+        <button class="btn" type="button">Register</button>
     </form>
 </div>
-
 {% endblock %}
