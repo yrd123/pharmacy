@@ -4,6 +4,11 @@ from django.conf import settings
 
 urlpatterns = [
     path('', views.index,name="index"),
+    path('login', views.login ,name="login"),
+    path('signup', views.signup ,name="signup"),
+    path('schedule1', views.schedule1 ,name="schedule1"),
+    path('schedule2', views.schedule2 ,name="schedule2"),
+    path('schedule3', views.schedule3 ,name="schedule3"),
 ]
 
 
