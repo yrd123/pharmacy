@@ -13,6 +13,7 @@ urlpatterns = [
     path('schedule1', views.schedule1 ,name="schedule1"),
     path('schedule2', views.schedule2 ,name="schedule2"),
     path('schedule3', views.schedule3 ,name="schedule3"),
+    path('dashboard', views.dashboard ,name="dashboard"),
 ]
 
 

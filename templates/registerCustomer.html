@@ -39,7 +39,7 @@ body {
     font-size: font-size;
     margin-bottom: -10px;
     font-weight: 500;
-    color: rgb(0, 162, 255);
+    color: #61b8ff;
 }
 
 .form {
@@ -68,7 +68,7 @@ body {
     outline: 0;
     transition: 0.3s;
     color:white;
-    background-color: rgb(0, 162, 255);;
+    background-color: #61b8ff;
     
 }
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -161,7 +161,7 @@ body {
   
       <div class="navbar-menu" id="open-navbar1">
         <ul class="navbar-nav">
-          <li><a href="#">Home</a></li>
+          <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
           <li><a href="#">Profile</a></li>
           <li class="navbar-dropdown">
             <a href="#" class="dropdown-toggler" data-dropdown="my-dropdown-id">
@@ -174,7 +174,7 @@ body {
             </ul>
           </li>
           <li><a href="{% url 'billing' %}">Billing</a></li>
-          <li><a href="#">LogOut</a></li>
+          <li><a href="{% url 'login' %}">LogOut</a></li>
         </ul>
       </div>
     </div>

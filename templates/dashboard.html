@@ -18,81 +18,44 @@
 body {
     font-family:  cursive;
     font-size: font-size;
-    background: url("../static/GettyImages-938938858-7b656e6317ab4e2797556bdddce9595d.jpg");
-    background-size: cover;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 30px;
+  height: 70vh;
 }
 
-
-
-.user {
-    width: 90%;
-    max-width: 340px;
-    margin: 25vh 5vh 10vh 135vh;
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-size: 30px;
 }
 
-.user__header {
-    text-align: center;
-    opacity: 0;
-    transform: translate3d(0, 500px, 0);
-    animation: arrive 500ms ease-in-out 0.7s forwards;
+#inner-div{
+    margin:5% 15%;
 }
 
-.user__title {
-    font-size: font-size;
-    margin-bottom: -10px;
-    font-weight: 500;
-    color: #61b8ff;
-}
-
-.form {
-    margin-top: 40px;
-    border-radius: 6px;
-    overflow: hidden;
-    opacity: 0;
-    transform: translate3d(0, 500px, 0);
-    animation: arrive 500ms ease-in-out 0.9s forwards;
+.item1, .item2, .item3, .item4{
+    background-color: rgb(58, 163, 211) !important;
     
+    font-weight: 800;
+    opacity:0.8;
+    border-radius:10px;
 }
 
-.form--no {
-    animation: NO 1s ease-in-out;
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
+.item1:hover, .item2:hover, .item3:hover, .item4:hover{
+    background-color: rgb(19, 127, 177) !important;
+    cursor: pointer;
+}
+.grid-container a{
+    position: relative;
+    color: whitesmoke;
+    top:100px;
 }
 
-.form__input {
-    display: block;
-    width: 100%;
-    padding: 20px;
-    font-family: font-family;
-    -webkit-appearance: none;
-    border: 0;
-    outline: 0;
-    transition: 0.3s;
-    color:white;
-    background-color: #61b8ff;
-    
-}
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: white;
-  opacity: 1; /* Firefox */
-}
-.btn {
-    display: block;
-    width: 100%;
-    padding: 20px;
-    font-family: font-family;
-    -webkit-appearance: none;
-    outline: 0;
-    border: 0;
-    color: white;
-    background: rgb(0, 47, 255);
-    transition: 0.3s;
-
-}
-
-.btn:hover{
-    background: rgb(0, 27, 145);
+.grid-container a:hover{
+    text-decoration: none;
 }
 
 @keyframes NO {
@@ -163,7 +126,7 @@ body {
   
       <div class="navbar-menu" id="open-navbar1">
         <ul class="navbar-nav">
-          <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+          <li class="active"><a href="{% url 'dashboard' %}">Dashboard</a></li>
           <li><a href="#">Profile</a></li>
           <li class="navbar-dropdown">
             <a href="#" class="dropdown-toggler" data-dropdown="my-dropdown-id">
@@ -181,19 +144,14 @@ body {
       </div>
     </div>
   </nav>
-<div class="user">
-    <header class="user__header">
-        <h3 class="user__title">Login a Customer</h3>
-    </header>
-    
-    <form class="form">
-        
-        <div class="form__group">
-            <input type="number" placeholder="Phone Number of Customer" class="form__input" />
-        </div>
-        
-        
-        <button class="btn" type="button">Go</button>
-    </form>
-</div>
+  <div id="inner-div">
+  <div class="grid-container">
+    <div class="item1"><a href="{% url 'loginCustomer' %}">Login a Customer</a></div>
+    <div class="item2"><a href="{% url 'registerCustomer' %}">Register a Customer</a></div>
+    <div class="item3"><a href="{% url 'customer' %}">View a Customer</a></div>  
+    <div class="item4"><a href="{% url 'billing' %}">Billing</a></div>
+  </div>
+  </div>
+  
+
 {% endblock %}

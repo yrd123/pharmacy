@@ -271,7 +271,7 @@ ul{
   
       <div class="navbar-menu" id="open-navbar1">
         <ul class="navbar-nav">
-          <li><a href="#">Home</a></li>
+          <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
           <li><a href="#">Profile</a></li>
           <li class="navbar-dropdown active">
             <a href="#" class="dropdown-toggler" data-dropdown="my-dropdown-id">
@@ -284,7 +284,7 @@ ul{
             </ul>
           </li>
           <li><a href="{% url 'billing' %}">Billing</a></li>
-          <li><a href="#">LogOut</a></li>
+          <li><a href="{% url 'login' %}">LogOut</a></li>
         </ul>
       </div>
     </div>

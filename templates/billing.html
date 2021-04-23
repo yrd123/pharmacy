@@ -18,9 +18,103 @@
 body {
     font-family:  cursive;
     font-size: font-size;
-    background: url("../static/GettyImages-938938858-7b656e6317ab4e2797556bdddce9595d.jpg");
-    background-size: cover;
 }
+
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  overflow: hidden;
+}
+table td, table th {
+  border-top: 1px solid #ECF0F1;
+  padding: 10px;
+}
+table td {
+  border-left: 1px solid #ECF0F1;
+  border-right: 1px solid #ECF0F1;
+}
+table th {
+  background-color: #4ECDC4;
+}
+table tr:nth-of-type(even) td {
+  background-color: #d9f4f2;
+}
+table .total th {
+  background-color: white;
+}
+table .total td {
+  text-align: right;
+  font-weight: 700;
+}
+
+
+
+
+@media only screen and (max-width: 760px) {
+  p {
+    display: block;
+    font-weight: bold;
+  }
+
+  table tr td:not(:first-child), table tr th:not(:first-child), table tr td:not(.total-val) {
+    display: none;
+  }
+  table tr:nth-of-type(even) td:first-child {
+    background-color: #d9f4f2;
+  }
+  table tr:nth-of-type(odd) td:first-child {
+    background-color: white;
+  }
+  table tr:nth-of-type(even) td:not(:first-child) {
+    background-color: white;
+  }
+  table tr th:first-child {
+    width: 100%;
+    display: block;
+  }
+  table tr th:not(:first-child) {
+    width: 40%;
+    transition: transform 0.4s ease-out;
+    transform: translateY(-9999px);
+    position: relative;
+    z-index: -1;
+  }
+  table tr td:not(:first-child) {
+    transition: transform 0.4s ease-out;
+    transform: translateY(-9999px);
+    width: 60%;
+    position: relative;
+    z-index: -1;
+  }
+  table tr td:first-child {
+    display: block;
+    cursor: pointer;
+  }
+  table tr.total th {
+    width: 25%;
+    display: inline-block;
+  }
+  table tr td.total-val {
+    display: inline-block;
+    transform: translateY(0);
+    width: 75%;
+  }
+}
+@media only screen and (max-width: 300px) {
+  table tr th:not(:first-child) {
+    width: 50%;
+    font-size: 14px;
+  }
+  table tr td:not(:first-child) {
+    width: 50%;
+    font-size: 14px;
+  }
+}
+
+
 
 .user {
     width: 90%;
@@ -75,19 +169,7 @@ body {
   color: white;
   opacity: 1; /* Firefox */
 }
-.btn {
-    display: block;
-    width: 100%;
-    padding: 20px;
-    font-family: font-family;
-    -webkit-appearance: none;
-    outline: 0;
-    border: 0;
-    color: white;
-    background: rgb(0, 47, 255);
-    transition: 0.3s;
 
-}
 
 .btn:hover{
     background: rgb(0, 27, 145);
@@ -161,7 +243,7 @@ body {
   
       <div class="navbar-menu" id="open-navbar1">
         <ul class="navbar-nav">
-          <li><a href="#">Home</a></li>
+          <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
           <li><a href="#">Profile</a></li>
           <li class="navbar-dropdown">
             <a href="#" class="dropdown-toggler" data-dropdown="my-dropdown-id">
@@ -173,42 +255,217 @@ body {
               <li><a href="{% url 'customer' %}">View</a></li>
             </ul>
           </li>
-          <li><a href="{% url 'billing' %}">Billing</a></li>
-          <li><a href="#">LogOut</a></li>
+          <li class="active"><a href="{% url 'billing' %}">Billing</a></li>
+          <li><a href="{% url 'login' %}">LogOut</a></li>
         </ul>
       </div>
     </div>
   </nav>
-<div class="user">
-    <header class="user__header">
-        <h3 class="user__title">Register Customer</h3>
-    </header>
-    
-    <form class="form">
-        
-        <div class="form__group">
-            <input type="number" placeholder="Phone Number of Customer" class="form__input" />
-        </div>
-
-        <div class="form__group">
-            <input type="email" placeholder="Email" class="form__input" />
-        </div>
-
-        <div class="form__group">
-            <input type="text" placeholder="Patient Name" class="form__input" />
-        </div>
-        
-        <div class="form__group">
-            <input type="text" placeholder="Address" class="form__input" />
-        </div>
-
-        
-        <div class="form__group">
-            <input type="date" placeholder="Date of Birth" class="form__input" />
-        </div>     
-        
-        
-        <button class="btn" type="button">Register</button>
-    </form>
+  <center><div style="font-size:3vh;">Schedule 1</div></center>
+  <div class="content__wrapper">
+    <table>
+      <thead>
+      <tr class="table-headers">
+        <th>Name of Medicine</th>
+        <th>Locality of Doctor</th>
+        <th>Doctor name</th>
+        <th>Hospital Name</th>
+        <th>#</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr class="table-info">
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><button class="btn btn-primary">Add</button></td>
+        </tr>
+      </tbody>
+    </table>
 </div>
+<center><div style="font-size:3vh;">Schedule 2</div></center>
+<div class="content__wrapper">
+    <table>
+      <thead>
+      <tr class="table-headers">
+        <th>Name of Medicine</th>
+        <th>Locality of Doctor</th>
+        <th>Doctor name</th>
+        <th>Hospital Name</th>
+        <th>#</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr class="table-info">
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><button class="btn btn-primary">Add</button></td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<center><div style="font-size:3vh;">Schedule 3</div></center>
+<div class="content__wrapper">
+    <table>
+      <thead>
+      <tr class="table-headers">
+        <th>Name of Medicine</th>
+        <th>Locality of Doctor</th>
+        <th>Doctor name</th>
+        <th>Hospital Name</th>
+        <th>#</th>
+      </tr>
+      </thead>
+      <tbody >
+        <tr class="table-info" >
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><button class="btn btn-primary">Add</button></td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<br><br>
+
+
+<center><div style="font-size:3vh;">Schedule 1</div></center>
+<div class="content__wrapper">
+    <table>
+      <thead>
+      <tr class="table-headers">
+        <th>Name of Medicine</th>
+        <th>Locality of Doctor</th>
+        <th>Doctor name</th>
+        <th>Hospital Name</th>
+        <th>#</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Remedisivir</td>
+          <td>Akola</td>
+          <td>Yash</td>
+          <td>Kokilaben</td>
+          <td><button class="btn btn-danger">Delete</button></td>
+        </tr>
+        <tr>
+          <td>Medicine 2</td>
+          <td>Kalyan</td>
+          <td>Sanyam</td>
+          <td>Gandhi Hospital</td>
+          <td><button class="btn btn-danger">Delete</button></td>
+        </tr>
+        <tr>
+          <td>Medicine 3</td>
+          <td>Goregaon</td>
+          <td>Krunal</td>
+          <td>Kasturba Hospital</td>
+          <td><button class="btn btn-danger">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<center><div style="font-size:3vh;">Schedule 2</div></center>
+<div class="content__wrapper">
+    <table>
+      <thead>
+      <tr class="table-headers">
+        <th>Name of Medicine</th>
+        <th>Locality of Doctor</th>
+        <th>Doctor name</th>
+        <th>Hospital Name</th>
+        <th>#</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Remedisivir</td>
+          <td>Akola</td>
+          <td>Yash</td>
+          <td>Kokilaben</td>
+          <td><button class="btn btn-danger">Delete</button></td>
+        </tr>
+        <tr>
+          <td>Medicine 2</td>
+          <td>Kalyan</td>
+          <td>Sanyam</td>
+          <td>Gandhi Hospital</td>
+          <td><button class="btn btn-danger">Delete</button></td>
+        </tr>
+        <tr>
+          <td>Medicine 3</td>
+          <td>Goregaon</td>
+          <td>Krunal</td>
+          <td>Kasturba Hospital</td>
+          <td><button class="btn btn-danger">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<center><div style="font-size:3vh;">Schedule 3</div></center>
+<div class="content__wrapper">
+    <table>
+      <thead>
+      <tr class="table-headers">
+        <th>Name of Medicine</th>
+        <th>Locality of Doctor</th>
+        <th>Doctor name</th>
+        <th>Hospital Name</th>
+        <th>#</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Remedisivir</td>
+          <td>Akola</td>
+          <td>Yash</td>
+          <td>Kokilaben</td>
+          <td><button class="btn btn-danger">Delete</button></td>
+        </tr>
+        <tr>
+          <td>Medicine 2</td>
+          <td>Kalyan</td>
+          <td>Sanyam</td>
+          <td>Gandhi Hospital</td>
+          <td><button class="btn btn-danger">Delete</button></td>
+        </tr>
+        <tr>
+          <td>Medicine 3</td>
+          <td>Goregaon</td>
+          <td>Krunal</td>
+          <td>Kasturba Hospital</td>
+          <td><button class="btn btn-danger">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<script>
+    $(window).on('resize', function() {
+    
+    if ($(this).width() < 760) {
+       $('tr td:first-child').click(function(){
+
+          $(this).siblings().css({'display': 'inline-block'});
+
+          var $this = $(this);
+          setTimeout(function(){
+          $this.siblings().css('transform', 'translateY(0)'); 
+         },0);
+
+          $('tr td:first-child').not($(this)).siblings().css({'display': 'none', 'transform': 'translateY(-9999px)'});
+      });  
+    } else if ($(this).width() > 760) {
+        //unbind click : name is not clickable when screen is > 700px
+        $( "tr td:first-child").unbind( "click" );
+        //remove with jquery added styles
+        $('tr td:first-child').siblings().css({'display': '', 'transform': ''});
+    }
+
+}).resize();
+</script>
 {% endblock %}

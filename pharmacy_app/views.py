@@ -20,6 +20,10 @@ def schedule2(request):
 def schedule3(request):
     return render(request,'index.html')
 
+def dashboard(request):
+    return render(request,'dashboard.html')
+
+
 def registerCustomer(request):
     return render(request,'registerCustomer.html')
 
