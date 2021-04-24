@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime
 # Create your models here.
 
 
@@ -51,6 +51,7 @@ class Billing(models.Model):
     billId = models.AutoField(primary_key = True)
     customer = models.ForeignKey(Customer, on_delete = models.CASCADE, related_name = 'billing')
     pharmacist = models.ForeignKey(Pharmacist, on_delete = models.CASCADE, related_name = 'billing')
-    doctor = models.ForeignKey(Doctor, on_delete = models.CASCADE, related_name = 'billing')
+    doctor = models.ForeignKey(Doctor, on_delete = models.CASCADE, related_name = 'billing', null=True, blank=True)
     medicines = models.CharField(max_length=1000)
     billAmount = models.IntegerField()
+    timestamp = models.DateTimeField(auto_now_add=True)

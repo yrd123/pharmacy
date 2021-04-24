@@ -186,14 +186,15 @@ body {
         <h3 class="user__title">Login a Customer</h3>
     </header>
     
-    <form class="form">
-        
+    <form class="form" action="/customer" method="POST">
+        {% csrf_token %}
         <div class="form__group">
-            <input type="number" placeholder="Phone Number of Customer" class="form__input" />
+            <input type="number" placeholder="Phone Number of Customer" class="form__input" name="contactNumber" minlength="10" maxlength="10" />
         </div>
         
         
         <button class="btn" type="submit">Go</button>
     </form>
 </div>
+
 {% endblock %}

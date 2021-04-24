@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 
-from .models import Pharmacist , Customer
+from .models import Pharmacist , Customer, Billing, Doctor, Medicine
 # Create your views here.
 
 def index(request):
@@ -116,20 +116,28 @@ def registerCustomer(request):
         )
         obj.save()
 
-        return redirect('dashboard')
+        return redirect('loginCustomer')
 
 
     return render(request,'registerCustomer.html')
 
-@login_required(login_url="login")
-def loginCustomer(request):
-    return render(request,'loginCustomer.html')
-
 
 @login_required(login_url="login")
 def customer(request):
-    return render(request,'customer.html')
+    if request.method == "POST":
+        contactNumber = request.POST['contactNumber']
+        if(Customer.objects.filter(contactNumber=contactNumber).exists()):
+            customer = Customer.objects.get(contactNumber=contactNumber)
+            bills = Billing.objects.filter(customer=customer)
+            context = {"bills":bills, "customer":customer}
+            return render(request,'customer.html', context)
+    return render(request,'loginCustomer.html')
 
+
+
+@login_required(login_url="login")
+def loginCustomer(request):
+    return render(request,'loginCustomer.html')
 
 @login_required(login_url="login")
 def billing(request):
