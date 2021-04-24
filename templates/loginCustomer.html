@@ -189,7 +189,7 @@ body {
     <form class="form" action="/customer" method="POST">
         {% csrf_token %}
         <div class="form__group">
-            <input type="number" placeholder="Phone Number of Customer" class="form__input" name="contactNumber" minlength="10" maxlength="10" />
+            <input type="number" placeholder="Phone Number of Customer" class="form__input" name="contactNumber" minlength="10" maxlength="10" required />
         </div>
         
         
