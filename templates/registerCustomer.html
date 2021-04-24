@@ -145,6 +145,64 @@ body {
 }
 
 </style>
+
+
+<script>
+    
+    function validateCustomer(){
+      var letters = /^[A-Za-z]+$/;
+  
+      if( document.registerCustomerForm.fullName.value == "" ) {
+        document.getElementById('signupwarning').innerHTML = "***Name cannot be Blank***";
+        document.registerCustomerForm.fullName.focus() ;
+        return false;
+      }
+      if( !/^[A-Za-z\s]+$/.test(document.registerCustomerForm.fullName.value) ) {
+        document.getElementById('signupwarning').innerHTML = "***Name can only Contain Alphabets and Space***";
+        document.registerCustomerForm.fullName.focus() ;
+        return false;
+      }
+      if( document.registerCustomerForm.email.value == "" ) {
+        document.getElementById('signupwarning').innerHTML = "***Email ID Cannot be Blank***";
+        document.registerCustomerForm.email.focus() ;
+        return false;
+      }
+      if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(document.registerCustomerForm.email.value)){
+        document.getElementById('signupwarning').innerHTML = "***Invalid Email Address***";
+        document.registerCustomerForm.email.focus() ;
+        return false;
+      }
+      
+
+      if( document.registerCustomerForm.contactNumber.value == "" ) {
+        document.getElementById('signupwarning').innerHTML = "***Mobile Number Cannot be Blank***";
+        document.registerCustomerForm.contactNumber.focus() ;
+        return false;
+      }
+      if( document.registerCustomerForm.contactNumber.value.length != 10 ){
+        document.getElementById('signupwarning').innerHTML = "***Mobile Number Must be 10 Digits***";
+        document.registerCustomerForm.contactNumber.focus() ;
+        return false;
+      }
+
+      if( document.registerCustomerForm.aadharNumber.value == "" ) {
+        document.getElementById('signupwarning').innerHTML = "***Aadhar Number Cannot be Blank***";
+        document.registerCustomerForm.contactNumber.focus() ;
+        return false;
+      }
+      if( document.registerCustomerForm.aadharNumber.value.length != 16 ){
+        document.getElementById('signupwarning').innerHTML = "***Aadhar Number Must be 16 Digits***";
+        document.registerCustomerForm.contactNumber.focus() ;
+        return false;
+      }
+      
+      
+  
+  return true;
+  }
+  
+</script>
+
 <nav class="navbar">
     <div class="container">
   
@@ -183,8 +241,14 @@ body {
     <header class="user__header">
         <h3 class="user__title">Register Customer</h3>
     </header>
+
     
-    <form action='/registerCustomer' class="form" method="POST">
+    <div id="signupwarning" class="warning">
+        <!-- INSERT SIGNUP WARNINGS HERE -->
+
+    </div>
+    
+    <form action='/registerCustomer' name="registerCustomerForm" onsubmit ="return validateCustomer()" class="form" method="POST">
 
         {% csrf_token %}
         <div class="form__group">

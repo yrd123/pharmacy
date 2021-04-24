@@ -173,7 +173,7 @@ body {
         document.signupform.email.focus() ;
         return false;
       }
-      if( !/^[a-zA-Z0-9]+$/.test(document.signupform.fullName.value) ) {
+      if( !/^[a-zA-Z0-9]+$/.test(document.signupform.username.value) ) {
         document.getElementById('signupwarning').innerHTML = "***Username can only Contain Alphabets and Numbers***";
         document.signupform.fullName.focus() ;
         return false;

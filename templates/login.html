@@ -144,70 +144,39 @@ body {
 
 <script>
     
-  function validatesignup(){
-    var letters = /^[A-Za-z]+$/;
+    function validatesignup(){
+      var letters = /^[A-Za-z]+$/;
+  
+      if( document.signupform.username.value == "" ) {
+        document.getElementById('signupwarning').innerHTML = "***Username Cannot be Blank***";
+        document.signupform.email.focus() ;
+        return false;
+      }
+      if( !/^[a-zA-Z0-9]+$/.test(document.signupform.username.value) ) {
+        document.getElementById('signupwarning').innerHTML = "***Username can only Contain Alphabets and Numbers***";
+        document.signupform.fullName.focus() ;
+        return false;
+      }
 
-    if( document.signupform.fullName.value == "" ) {
-      document.getElementById('signupwarning').innerHTML = "***Name cannot be Blank***";
-      document.signupform.fullName.focus() ;
-      return false;
-    }
-    if( !/^[A-Za-z\s]+$/.test(document.signupform.fullName.value) ) {
-      document.getElementById('signupwarning').innerHTML = "***Name can only Contain Alphabets and Space***";
-      document.signupform.fullName.focus() ;
-      return false;
-    }
-    if( document.signupform.email.value == "" ) {
-      document.getElementById('signupwarning').innerHTML = "***Email ID Cannot be Blank***";
-      document.signupform.email.focus() ;
-      return false;
-    }
-    if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(document.signupform.email.value)){
-      document.getElementById('signupwarning').innerHTML = "***Invalid Email Address***";
-      document.signupform.email.focus() ;
-      return false;
-    }
-    if( document.signupform.contactNumber.value == "" ) {
-      document.getElementById('signupwarning').innerHTML = "***Mobile Number Cannot be Blank***";
-      document.signupform.contactNumber.focus() ;
-      return false;
-    }
-    if( document.signupform.contactNumber.value.length != 10 ){
-      document.getElementById('signupwarning').innerHTML = "***Mobile Number Must be 10 Digits***";
-      document.signupform.contactNumber.focus() ;
-      return false;
-    }
-    if( document.signupform.year.value == "-1" ) {
-      document.getElementById('signupwarning').innerHTML = "***Please Select Year of Study***";
-      document.signupform.year.focus() ;
-      return false;
-    }
-    if( document.signupform.branch.value == "-1" ) {
-      document.getElementById('signupwarning').innerHTML = "***Please Select Branch***";
-      document.signupform.branch.focus() ;
-      return false;
-    }
-    if( document.signupform.password.value == "" ) {
-      document.getElementById('signupwarning').innerHTML = "***Password Cannot be Blank***";
-      document.signupform.password.focus() ;
-      return false;
-    }
-    if( document.signupform.password.value.length<6 ){
-      document.getElementById('signupwarning').innerHTML = "***Password Too Short***";
-      document.signupform.password.focus() ;
-      return false;
-    }
-    if( document.signupform.password.value != document.signupform.confirmPassword.value ){
-      document.getElementById('signupwarning').innerHTML = "***Password and Confirm Password Fields Do Not Match***";
-      document.signupform.confirmPassword.focus() ;
-      return false;
-    }
-    
+      
+      if( document.signupform.password.value == "" ) {
+        document.getElementById('signupwarning').innerHTML = "***Password Cannot be Blank***";
+        document.signupform.password.focus() ;
+        return false;
+      }
+      if( document.signupform.password.value.length<6 ){
+        document.getElementById('signupwarning').innerHTML = "***Password Too Short***";
+        document.signupform.password.focus() ;
+        return false;
+      }
+      
+      
+  
+  return true;
+  }
+  
+  </script>
 
-return true;
-}
-
-</script>
 <nav class="navbar">
     <div class="container">
   
@@ -241,7 +210,13 @@ return true;
         {% endif %}
     </h4>
 
-    <form action="/login"  class="form" method="POST">
+    
+    <div id="signupwarning" class="warning">
+        <!-- INSERT SIGNUP WARNINGS HERE -->
+
+    </div>
+
+    <form action="/login" onsubmit="return validatesignup()"  name="signupform" class="form" method="POST">
         {% csrf_token %}
         
         <div class="form__group">
