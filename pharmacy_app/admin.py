@@ -1,3 +1,11 @@
-from django.contrib import admin
 
 # Register your models here.
+from django.apps import AppConfig
+from django.contrib import admin
+from .models import Pharmacist , Customer , Doctor 
+
+
+
+admin.site.register(Pharmacist)
+admin.site.register(Customer)
+admin.site.register(Doctor)

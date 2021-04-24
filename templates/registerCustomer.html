@@ -184,31 +184,37 @@ body {
         <h3 class="user__title">Register Customer</h3>
     </header>
     
-    <form class="form">
-        
+    <form action='/registerCustomer' class="form" method="POST">
+
+        {% csrf_token %}
         <div class="form__group">
-            <input type="number" placeholder="Phone Number of Customer" class="form__input" />
+            <input name="contactNumber" type="number" placeholder="Phone Number of Customer" class="form__input" />
         </div>
 
         <div class="form__group">
-            <input type="email" placeholder="Email" class="form__input" />
+            <input name="email" type="email" placeholder="Email" class="form__input" />
         </div>
 
         <div class="form__group">
-            <input type="text" placeholder="Patient Name" class="form__input" />
+            <input name="fullName" type="text" placeholder="Patient Name" class="form__input" />
         </div>
         
         <div class="form__group">
-            <input type="text" placeholder="Address" class="form__input" />
+            <input name="address" type="text" placeholder="Address" class="form__input" />
         </div>
 
         
         <div class="form__group">
-            <input type="date" placeholder="Date of Birth" class="form__input" />
-        </div>     
+            <input name="dob" type="date" placeholder="Date of Birth" class="form__input" />
+        </div> 
         
         
-        <button class="btn" type="button">Register</button>
+        <div class="form__group">
+            <input name="aadharNumber" type="text" placeholder="Aadhar Number" class="form__input" />
+        </div> 
+        
+        
+        <button name="submit" class="btn" type="submit">Register</button>
     </form>
 </div>
 {% endblock %}
