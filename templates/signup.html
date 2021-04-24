@@ -169,27 +169,31 @@ body {
     <header class="user__header">
         <h1 class="user__title">Sign Up</h1>
     </header>
-    
+    <h4>
+    {% if err %}
+        {{err}}
+    {% endif %}
+    </h4>
     <form action="/signup" class="form" method="POST">
         {% csrf_token %}
         <div class="form__group">
-            <input name = "fullName" type="text" placeholder="Name" class="form__input" />
+            <input name = "fullName" type="text" placeholder="Name" class="form__input" required/>
         </div>
         
         <div class="form__group">
-            <input name = "username" type="text" placeholder="Username" class="form__input" />
+            <input name = "username" type="text" placeholder="Username" class="form__input" required/>
         </div>
 
         <div class="form__group">
-            <input name="email" type="text" placeholder="Email" class="form__input" />
+            <input name="email" type="email" placeholder="Email" class="form__input" required/>
         </div>
         
         <div class="form__group">
-            <input name="password" type="password" placeholder="Password" class="form__input" />
+            <input name="password" type="password" placeholder="Password" class="form__input" required />
         </div>
 
         <div class="form__group">
-            <input name="contactNumber" type="number" placeholder="Phone Number" class="form__input" />
+            <input name="contactNumber" type="number" placeholder="Phone Number" class="form__input" required minlength="10" maxlength="12" />
         </div>
 <!--         
         <div class="form__group">
@@ -197,10 +201,10 @@ body {
         </div> -->
 
         <div class="form__group">
-            <input name="aadharNumber" type="text" placeholder="Aadhar Number" class="form__input" />
+            <input name="aadharNumber" type="text" placeholder="Aadhar Number" class="form__input" required minlength="16" maxlength="16" />
         </div>
      
-        <a href="{% url 'loginCustomer' %}"><button name="submit" class="btn" type="button">Register</button></a>
+        <button name="submit" class="btn" type="submit">Register</button>
     </form>
 </div>
 {% endblock %}

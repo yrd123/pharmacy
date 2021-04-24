@@ -9,7 +9,7 @@ class Pharmacist(models.Model):
     fullName = models.CharField(max_length=255)
     password = models.CharField(max_length=20)
     contactNumber= models.CharField(max_length=12)
-    aadharNumber=models.CharField(max_length = 16)
+    aadharNumber=models.CharField(max_length = 16, unique=True)
 
     def __str__(self):
         return self.email
@@ -40,6 +40,17 @@ class Doctor(models.Model):
 
 
 
+class Medicine(models.Model):
+    medicineId= models.AutoField(primary_key = True)
+    medicineName = models.CharField(max_length = 255 , unique=True)
+    schedule = models.CharField(max_length=13, choices=(("1","1"),("2","2"),("3","3")), default="1")
+    price = models.IntegerField()
 
 
-
+class Billing(models.Model):
+    billId = models.AutoField(primary_key = True)
+    customer = models.ForeignKey(Customer, on_delete = models.CASCADE, related_name = 'billing')
+    pharmacist = models.ForeignKey(Pharmacist, on_delete = models.CASCADE, related_name = 'billing')
+    doctor = models.ForeignKey(Doctor, on_delete = models.CASCADE, related_name = 'billing')
+    medicines = models.CharField(max_length=1000)
+    billAmount = models.IntegerField()

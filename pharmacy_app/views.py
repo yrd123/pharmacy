@@ -18,13 +18,17 @@ def signup(request):
     err=""
     if request.method == 'POST':
         email = request.POST.get('email')
-        
         username = request.POST.get('username')
+        aadharNumber = request.POST.get('aadharNumber')
         if Pharmacist.objects.filter(email = email).exists():
             err = 'Email already taken. Try a different one.'
+            print(err)
         elif Pharmacist.objects.filter(username = username).exists(): 
             err = "Username already Taken. Try a different one"
-
+            print(err)
+        elif Pharmacist.objects.filter(aadharNumber= aadharNumber).exists(): 
+            err = "Aadhar number already Taken. Try a different one"
+            print(err)
         else:
             obj1 = User.objects.create(
                 username = username,
@@ -35,7 +39,6 @@ def signup(request):
             fullName = request.POST.get('fullName')  
             password = request.POST.get('password')
             contactNumber = request.POST.get('contactNumber')
-            aadharNumber = request.POST.get('aadharNumber')
 
             obj2 = Pharmacist.objects.create(
                 email = email,
@@ -48,9 +51,9 @@ def signup(request):
             )
             obj2.save()
             return redirect("login")
+        
     template_name = 'signup.html'
     context={'err':err}
-
     return render(request, template_name,context)
 
 
@@ -64,7 +67,7 @@ def login(request):
         user = authenticate(request, username = username, password = password)
         if user is not None:
             auth.login(request, user)
-            return redirect('index')
+            return redirect('dashboard')
         else:
            err = 'Input correct email and password'
     template_name = 'login.html'
@@ -73,7 +76,7 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('/')
+    return redirect('/login')
 
 
 def schedule1(request):
@@ -85,10 +88,11 @@ def schedule2(request):
 def schedule3(request):
     return render(request,'index.html')
 
+@login_required(login_url="login")
 def dashboard(request):
     return render(request,'dashboard.html')
 
-
+@login_required(login_url="login")
 def registerCustomer(request):
     print("here")
     if request.method == 'POST':
@@ -117,12 +121,16 @@ def registerCustomer(request):
 
     return render(request,'registerCustomer.html')
 
+@login_required(login_url="login")
 def loginCustomer(request):
     return render(request,'loginCustomer.html')
 
+
+@login_required(login_url="login")
 def customer(request):
     return render(request,'customer.html')
 
 
+@login_required(login_url="login")
 def billing(request):
     return render(request,'billing.html')

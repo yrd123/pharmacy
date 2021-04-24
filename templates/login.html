@@ -168,20 +168,23 @@ body {
     <header class="user__header">
         <h1 class="user__title">Login</h1>
     </header>
-    
+    <h4>
+        {% if err %}
+            {{err}}
+        {% endif %}
+    </h4>
     <form action="/login"  class="form" method="POST">
         {% csrf_token %}
-        <div class="form__group">
-            <input name="username" type="text" placeholder="Username" class="form__input" />
-        </div>
-        
-      
         
         <div class="form__group">
-            <input name="password" type="password" placeholder="Password" class="form__input" />
+            <input name="username" type="text" placeholder="Username" class="form__input" required />
         </div>
         
-        <a href="{% url 'dashboard' %}"><button name="submit" class="btn" type="button">Login</button></a>
+        <div class="form__group">
+            <input name="password" type="password" placeholder="Password" class="form__input" required />
+        </div>
+        
+        <button name="submit" class="btn" type="submit">Login</button>
     </form>
 </div>
 
