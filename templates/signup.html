@@ -141,6 +141,83 @@ body {
 }
 
 </style>
+
+
+<script>
+    
+    function validatesignup(){
+      var letters = /^[A-Za-z]+$/;
+  
+      if( document.signupform.fullName.value == "" ) {
+        document.getElementById('signupwarning').innerHTML = "***Name cannot be Blank***";
+        document.signupform.fullName.focus() ;
+        return false;
+      }
+      if( !/^[A-Za-z\s]+$/.test(document.signupform.fullName.value) ) {
+        document.getElementById('signupwarning').innerHTML = "***Name can only Contain Alphabets and Space***";
+        document.signupform.fullName.focus() ;
+        return false;
+      }
+      if( document.signupform.email.value == "" ) {
+        document.getElementById('signupwarning').innerHTML = "***Email ID Cannot be Blank***";
+        document.signupform.email.focus() ;
+        return false;
+      }
+      if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(document.signupform.email.value)){
+        document.getElementById('signupwarning').innerHTML = "***Invalid Email Address***";
+        document.signupform.email.focus() ;
+        return false;
+      }
+      if( document.signupform.username.value == "" ) {
+        document.getElementById('signupwarning').innerHTML = "***Username Cannot be Blank***";
+        document.signupform.email.focus() ;
+        return false;
+      }
+      if( !/^[a-zA-Z0-9]+$/.test(document.signupform.fullName.value) ) {
+        document.getElementById('signupwarning').innerHTML = "***Username can only Contain Alphabets and Numbers***";
+        document.signupform.fullName.focus() ;
+        return false;
+      }
+
+      if( document.signupform.contactNumber.value == "" ) {
+        document.getElementById('signupwarning').innerHTML = "***Mobile Number Cannot be Blank***";
+        document.signupform.contactNumber.focus() ;
+        return false;
+      }
+      if( document.signupform.contactNumber.value.length != 10 ){
+        document.getElementById('signupwarning').innerHTML = "***Mobile Number Must be 10 Digits***";
+        document.signupform.contactNumber.focus() ;
+        return false;
+      }
+
+      if( document.signupform.aadharNumber.value == "" ) {
+        document.getElementById('signupwarning').innerHTML = "***Aadhar Number Cannot be Blank***";
+        document.signupform.contactNumber.focus() ;
+        return false;
+      }
+      if( document.signupform.aadharNumber.value.length != 16 ){
+        document.getElementById('signupwarning').innerHTML = "***Aadhar Number Must be 16 Digits***";
+        document.signupform.contactNumber.focus() ;
+        return false;
+      }
+      
+      if( document.signupform.password.value == "" ) {
+        document.getElementById('signupwarning').innerHTML = "***Password Cannot be Blank***";
+        document.signupform.password.focus() ;
+        return false;
+      }
+      if( document.signupform.password.value.length<6 ){
+        document.getElementById('signupwarning').innerHTML = "***Password Too Short***";
+        document.signupform.password.focus() ;
+        return false;
+      }
+      
+      
+  
+  return true;
+  }
+  
+  </script>
 <nav class="navbar">
     <div class="container">
   
@@ -174,7 +251,12 @@ body {
         {{err}}
     {% endif %}
     </h4>
-    <form action="/signup" class="form" method="POST">
+    
+    <div id="signupwarning" class="warning">
+        <!-- INSERT SIGNUP WARNINGS HERE -->
+
+    </div>
+    <form action="/signup" class="form" id="signup" onsubmit="return validatesignup()"  name="signupform" method="POST">
         {% csrf_token %}
         <div class="form__group">
             <input name = "fullName" type="text" placeholder="Name" class="form__input" required/>
