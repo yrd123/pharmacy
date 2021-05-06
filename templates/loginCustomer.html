@@ -164,7 +164,7 @@ body {
       <div class="navbar-menu" id="open-navbar1">
         <ul class="navbar-nav">
           <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-          <li><a href="#">Profile</a></li>
+          <li><a href="{% url 'profile' %}">Profile</a></li>
           <li class="navbar-dropdown">
             <a href="#" class="dropdown-toggler" data-dropdown="my-dropdown-id">
               Customer <i class="fa fa-angle-down"></i>
@@ -183,8 +183,10 @@ body {
   </nav>
 <div class="user">
     <header class="user__header">
-        <h3 class="user__title">Login a Customer</h3>
+        <h3 class="user__title">Login a Customer</h3><br>
+        <h5 class="user__title">{{err}}</h5>
     </header>
+    
     
     <form class="form" action="/customer" method="POST">
         {% csrf_token %}

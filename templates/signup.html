@@ -171,17 +171,19 @@ body {
     
     <header class="user__header">
         <h1 class="user__title">Sign Up</h1>
+        <br>
+        <h4 style="color:white">
+            {% if err %}
+                {{err}}
+            {% endif %}
+        </h4>
     </header>
-    <h4>
-    {% if err %}
-        {{err}}
-    {% endif %}
-    </h4>
     
-    <div id="signupwarning" class="warning">
+    
+    <center><div id="signupwarning" class="warning" style="color:white;">
         <!-- INSERT SIGNUP WARNINGS HERE -->
 
-    </div>
+    </div></center>
     <form action="/signup" class="form" id="signup" onsubmit="return validatesignup()"  name="signupform" method="POST">
         {% csrf_token %}
         <div class="form__group">

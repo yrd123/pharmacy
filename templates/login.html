@@ -202,20 +202,20 @@ body {
   </nav>
 <div class="user">
     <header class="user__header">
-        <h1 class="user__title">Login</h1>
+        <h1 class="user__title">Login</h1><br>
+        <h4 style="color:white">
+            {% if err %}
+                {{err}}
+            {% endif %}
+        </h4>
     </header>
-    <h4>
-        {% if err %}
-            {{err}}
-        {% endif %}
-    </h4>
+    
 
     
-    <div id="signupwarning" class="warning">
+    <center><div id="signupwarning" class="warning" style="color:white">
         <!-- INSERT SIGNUP WARNINGS HERE -->
-
-    </div>
-
+        
+    </div></center>
     <form action="/login" onsubmit="return validatesignup()"  name="signupform" class="form" method="POST">
         {% csrf_token %}
         

@@ -6,12 +6,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 
-from .models import Pharmacist , Customer, Billing, Doctor, Medicine
+from .models import Pharmacist , Customer, Billing, Doctor, Medicine, Entry
 # Create your views here.
 
 def index(request):
-    return render(request,'index.html')
-
+    return redirect('login')
 
 
 def signup(request):
@@ -79,6 +78,11 @@ def logout(request):
     return redirect('/login')
 
 
+def profile(request):
+    pharmacist = Pharmacist.objects.get(username = request.user.username)
+    return render(request, 'profile.html',{'pharmacist':pharmacist})
+
+
 def schedule1(request):
     return render(request,'schedule1.html')
 
@@ -124,14 +128,18 @@ def registerCustomer(request):
 
 @login_required(login_url="login")
 def customer(request):
+    err = ""
     if request.method == "POST":
         contactNumber = request.POST['contactNumber']
         if(Customer.objects.filter(contactNumber=contactNumber).exists()):
             customer = Customer.objects.get(contactNumber=contactNumber)
             bills = Billing.objects.filter(customer=customer)
-            context = {"bills":bills, "customer":customer}
+            entries = Entry.objects.filter(bill__customer__contactNumber__contains = contactNumber)
+            context = {"bills":bills, "customer":customer,'entries':entries}
             return render(request,'customer.html', context)
-    return render(request,'loginCustomer.html')
+        else:
+            err = "Enter a valid phone number"
+    return render(request,'loginCustomer.html', {'err':err})
 
 
 

@@ -44,7 +44,7 @@ class Medicine(models.Model):
     medicineId= models.AutoField(primary_key = True)
     medicineName = models.CharField(max_length = 255 , unique=True)
     schedule = models.CharField(max_length=13, choices=(("1","1"),("2","2"),("3","3")), default="1")
-    price = models.IntegerField()
+    price = models.FloatField()
 
 
 class Billing(models.Model):
@@ -52,6 +52,11 @@ class Billing(models.Model):
     customer = models.ForeignKey(Customer, on_delete = models.CASCADE, related_name = 'billing')
     pharmacist = models.ForeignKey(Pharmacist, on_delete = models.CASCADE, related_name = 'billing')
     doctor = models.ForeignKey(Doctor, on_delete = models.CASCADE, related_name = 'billing', null=True, blank=True)
-    medicines = models.CharField(max_length=1000)
     billAmount = models.IntegerField()
     timestamp = models.DateTimeField(auto_now_add=True)
+
+class Entry(models.Model):
+    medicine = models.ForeignKey(Medicine, on_delete = models.CASCADE, related_name = 'entry')
+    bill = models.ForeignKey(Billing, on_delete = models.CASCADE, related_name = 'entry')
+    quantity = models.IntegerField()
+    price = models.FloatField()
